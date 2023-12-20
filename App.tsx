@@ -1,56 +1,39 @@
-/* eslint-disable react-native/no-inline-styles */
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import {Button, Text, View} from 'react-native';
-
+import {StyleSheet, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import CustomIcon from './src/components/CustomIcon';
+import DetailsScreen from './src/screens/DetailsScreen';
+import PaymentScreen from './src/screens/PaymentScreen';
+import TabNavigator from './src/navigators/TabNavigator';
 
 const Stack = createNativeStackNavigator();
 
-function HomeScreen({navigation}: any) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Detail')}
-      />
-      <CustomIcon name="search" size={25} />
-    </View>
-  );
-}
-
-function DetailsScreen({navigation}: any) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen
+          name="Tab"
+          component={TabNavigator}
+          options={{animation: 'slide_from_bottom'}}
+        />
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={{animation: 'slide_from_bottom'}}
+        />
         <Stack.Screen
           name="Home"
-          component={HomeScreen}
-          options={{title: 'EdricPhan'}}
+          component={PaymentScreen}
+          options={{animation: 'slide_from_bottom'}}
         />
-        <Stack.Screen name="Detail" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default App;
+
+const styles = StyleSheet.create({});
+
+// 52:14
